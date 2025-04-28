@@ -1,0 +1,148 @@
+{% extends "base_public.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<!-- Top Navigation Bar -->
+<div class="navbar">
+  <a href="{{ url_for('public_home') }}" class="nav-btn">Home</a>
+  <a href="{{ url_for('global_standings') }}" class="nav-btn">Global Standings</a>
+  <a href="{{ url_for('login') }}" class="nav-btn">Admin</a>
+</div>
+
+<!-- Events Section -->
+<div class="events-container">
+
+  {% if boards %}
+    {% for board in boards %}
+    <div class="event-card">
+      <img src="{{ board['image'] }}" alt="{{ board['name'] }}" class="event-image">
+      <div class="event-info">
+        <h2>{{ board['name'] }}</h2>
+        <a href="{{ url_for('public_standings', board_id=board['id']) }}" class="action-btn">View Standings</a><br><br>
+        <a href="{{ url_for('prediction_event', board_id=board['id']) }}" class="action-btn">Make Picks</a>
+      </div>
+    </div>
+    {% endfor %}
+  {% else %}
+    <p style="text-align: center; color: white; font-size: 24px;">No events available yet.</p>
+  {% endif %}
+
+</div>
+
+<!-- Styles -->
+<style>
+  /* Navbar */
+  .navbar {
+    background-color: #1e1e1e;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  .nav-btn {
+    background-color: yellow;
+    color: black;
+    font-weight: bold;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 18px;
+    transition: background-color 0.3s;
+  }
+
+  .nav-btn:hover {
+    background-color: #ffd700;
+  }
+
+  /* Events */
+  .events-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  .event-card {
+    background-color: #1e1e1e;
+    border: 2px solid yellow;
+    border-radius: 12px;
+    overflow: hidden;
+    width: 300px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .event-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.7);
+  }
+
+  .event-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+
+  .event-info {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .event-info h2 {
+    color: yellow;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .action-btn {
+    background-color: yellow;
+    color: black;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 16px;
+    display: inline-block;
+    transition: background-color 0.3s;
+  }
+
+  .action-btn:hover {
+    background-color: #ffd700;
+  }
+
+  /* MOBILE RESPONSIVE STYLES */
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .event-card {
+      width: 90%;
+    }
+
+    .event-info h2 {
+      font-size: 20px;
+    }
+
+    .nav-btn, .action-btn {
+      width: auto;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+
+    .event-image {
+      height: 160px;
+    }
+  }
+</style>
+
+{% endblock %}

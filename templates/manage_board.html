@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Managing: {{ board['name'] }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='admin_style.css') }}">
+  <style>
+    body {
+      background-color: #121212;
+      margin: 0;
+      font-family: 'Oswald', sans-serif;
+      color: white;
+    }
+
+    .top-buttons {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      background-color: #1e1e1e;
+    }
+
+    .container {
+      padding: 30px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section {
+      background-color: #1e1e1e;
+      padding: 20px;
+      margin-bottom: 30px;
+      border: 2px solid yellow;
+      border-radius: 10px;
+    }
+
+    h1, h2 {
+      margin-bottom: 20px;
+      color: yellow;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 300px;
+      font-size: 16px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .players-list, .matches-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .player-row, .match-row {
+      background-color: #2a2a2a;
+      padding: 15px 20px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background-color 0.3s;
+    }
+
+    .player-row:hover, .match-row:hover {
+      background-color: #333;
+    }
+
+    .player-name, .match-name {
+      font-size: 22px;
+      flex-grow: 1;
+      text-align: left;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn, .delete-match-btn {
+      width: 110px;
+      height: 40px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      padding: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .btn {
+      background-color: yellow;
+      color: black;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #ffd700;
+    }
+
+    .delete-match-btn {
+      background-color: darkred;
+      color: white;
+    }
+
+    .delete-match-btn:hover {
+      background-color: crimson;
+    }
+
+    .add-btn {
+      background-color: limegreen;
+      color: black;
+      padding: 6px 12px;
+      font-weight: bold;
+      font-size: 14px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .subtract-btn {
+      background-color: red;
+      color: white;
+      padding: 6px 12px;
+      font-weight: bold;
+      font-size: 14px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Top Navigation -->
+<div class="top-buttons">
+  <a href="{{ url_for('admin_dashboard') }}" class="btn">← Back to Admin</a>
+  <a href="{{ url_for('prediction_event', board_id=board['id']) }}" class="btn">View Predictions</a>
+</div>
+
+<div class="container">
+
+  <!-- Managing Title -->
+  <div class="section">
+    <h1>Managing: {{ board['name'] }}</h1>
+  </div>
+
+  <!-- Add Player Section -->
+  <div class="section">
+    <h2>Add New Player</h2>
+    <form action="{{ url_for('add_player', board_id=board['id']) }}" method="POST">
+      <input type="text" name="player_name" placeholder="New Player Name" required>
+      <button type="submit" class="btn">Add Player</button>
+    </form>
+  </div>
+
+  <!-- Players List Section -->
+  <div class="section">
+    <h2>Players</h2>
+    <div class="players-list">
+      {% for player in players %}
+      <div class="player-row">
+        <div class="player-name">{{ player['name'] }} ({{ player['points'] }} pts)</div>
+        <div class="button-group">
+          <form action="{{ url_for('update_points', player_id=player['id'], action='add') }}" method="POST" style="display: inline;">
+            <input type="hidden" name="board_id" value="{{ board['id'] }}">
+            <button type="submit" class="add-btn">+1</button>
+          </form>
+          <form action="{{ url_for('update_points', player_id=player['id'], action='subtract') }}" method="POST" style="display: inline;">
+            <input type="hidden" name="board_id" value="{{ board['id'] }}">
+            <button type="submit" class="subtract-btn">-1</button>
+          </form>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Add Match Section -->
+  <div class="section">
+    <h2>Add New Match</h2>
+    <form action="{{ url_for('add_match', board_id=board['id']) }}" method="POST">
+      <input type="text" name="match_name" placeholder="Match Title (e.g. John vs Randy)" required><br>
+      <input type="text" name="options" placeholder="Option 1 (e.g. John Cena)" required><br>
+      <input type="text" name="options" placeholder="Option 2 (e.g. Randy Orton)" required><br>
+      <input type="text" name="options" placeholder="Option 3 (optional)"><br>
+      <input type="text" name="options" placeholder="Option 4 (optional)"><br>
+      <button type="submit" class="btn">Add Match</button>
+    </form>
+  </div>
+
+  <!-- Matches List Section -->
+  <div class="section">
+    <h2>Matches</h2>
+    <div class="matches-list">
+      {% for match in matches %}
+      <div class="match-row">
+        <div class="match-name">{{ match['match_name'] }}</div>
+        <div class="button-group">
+          <a href="{{ url_for('view_match_predictions', match_id=match['id']) }}" class="btn">View Predictions</a>
+
+          <form action="{{ url_for('delete_match', match_id=match['id']) }}" method="POST" style="display: inline;">
+            <input type="hidden" name="board_id" value="{{ board['id'] }}">
+            <button type="submit" class="delete-match-btn">Delete</button>
+          </form>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='admin_style.css') }}">
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+    input[type="password"] {
+      padding: 10px;
+      width: 300px;
+      border-radius: 5px;
+      border: none;
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+    .btn {
+      background-color: yellow;
+      color: black;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      border: none;
+    }
+    .error {
+      color: red;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Enter Admin Password</h1>
+
+  {% if error %}
+  <div class="error">{{ error }}</div>
+  {% endif %}
+
+  <form method="POST">
+    <input type="password" name="password" placeholder="Password" required><br>
+    <button type="submit" class="btn">Login</button>
+  </form>
+</body>
+</html>

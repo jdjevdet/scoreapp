@@ -1,0 +1,11 @@
+{% extends "base_public.html" %}
+
+{% block title %}Thank You{% endblock %}
+
+{% block content %}
+<div style="text-align: center; margin-top: 100px;">
+  <h1 style="color: yellow; font-size: 48px;">Thank you for submitting your picks!</h1>
+  <p style="color: white; font-size: 24px;">Good luck predicting {{ board['name'] }}!</p>
+  <a href="{{ url_for('public_home') }}" class="btn" style="margin-top: 30px;">Return Home</a>
+</div>
+{% endblock %}

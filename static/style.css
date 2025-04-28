@@ -1,0 +1,30 @@
+body {
+  background: #000;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  margin: 0; padding: 0;
+}
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+.btn {
+  background: #ffd700;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 4px;
+  margin: 4px;
+}
+table.players-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+.players-table th, .players-table td {
+  border: 1px solid #444;
+  padding: 8px;
+}
+.players-table th { background: #ffd700; color: #000; }

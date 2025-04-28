@@ -1,0 +1,104 @@
+{% extends "base_public.html" %}
+
+{% block title %}{{ board['name'] }} Standings{% endblock %}
+
+{% block content %}
+
+<!-- Top Back Button -->
+<div style="padding: 20px; text-align: center;">
+  <a href="{{ url_for('public_home') }}" style="background-color: yellow; color: black; font-weight: bold; font-size: 18px; padding: 10px 24px; border-radius: 8px; text-decoration: none; box-shadow: 0 2px 5px rgba(0,0,0,0.5); transition: background-color 0.3s;">
+    ← Back
+  </a>
+</div>
+
+<!-- Event Banner -->
+<div style="text-align: center;">
+  <img src="{{ board['image'] }}" alt="{{ board['name'] }}" 
+       style="display: block; margin: 20px auto 40px auto; width: 85%; max-width: 700px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.6);">
+</div>
+
+<!-- Standings Box -->
+<div class="standings-box">
+
+  <h1 style="color: yellow; text-align: center; font-size: 36px; margin-bottom: 30px;">{{ board['name'] }}</h1>
+
+  {% if players %}
+    <div style="border: 3px solid yellow; border-radius: 10px; overflow: hidden;">
+
+      {% for player in players %}
+      <div class="player-row"
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 20px 25px;
+          font-size: 26px;
+          font-weight: bold;
+          transition: background-color 0.3s, transform 0.2s;
+          {% if loop.index == 1 %}
+            background-color: #ffd700; color: black;
+          {% elif loop.index == 2 %}
+            background-color: #c0c0c0; color: black;
+          {% elif loop.index == 3 %}
+            background-color: #cd7f32; color: black;
+          {% else %}
+            background-color: #1e1e1e; color: white;
+          {% endif %}
+          border-bottom: 1px solid #333;
+          {% if loop.index > 3 %}
+            cursor: pointer;
+          {% endif %}
+        "
+        {% if loop.index > 3 %}
+          onmouseover="this.style.backgroundColor='#444'; this.style.transform='scale(1.02)';"
+          onmouseout="this.style.backgroundColor='#1e1e1e'; this.style.transform='scale(1)';"
+        {% endif %}
+      >
+        <div>{{ loop.index }}</div>
+        <div>{{ player['name'] }}</div>
+        <div>{{ player['points'] }}</div>
+      </div>
+      {% endfor %}
+
+    </div>
+  {% else %}
+    <p style="color: white; text-align: center; font-size: 24px;">No players yet.</p>
+  {% endif %}
+
+</div>
+
+<!-- MOBILE RESPONSIVE STYLES -->
+<style>
+  .standings-box {
+    max-width: 550px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: black;
+    border: 3px solid yellow;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+  }
+
+  @media (max-width: 768px) {
+    .standings-box {
+      width: 90%;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+    }
+
+    .player-row {
+      font-size: 22px !important;
+      padding: 16px 20px;
+    }
+
+    img {
+      width: 95% !important;
+      max-width: 95% !important;
+    }
+  }
+</style>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base_public.html" %}
+
+{% block title %}Prediction Centre - Public Site{% endblock %}
+
+{% block content %}
+<h1 style="color: yellow; font-size: 48px; margin-bottom: 40px;">Prediction Centre</h1>
+
+<div class="events-grid">
+  {% for board in boards %}
+  <div class="event-tile">
+    <a href="{{ url_for('prediction_event', board_id=board['id']) }}" style="text-decoration: none; color: inherit;">
+     <img src="{{ board['image'] }}" alt="{{ board['name'] }}" style="display: block; margin: 30px auto; width: 90%; max-width: 800px; border-radius: 10px;">
+
+      <div class="event-info">
+        <h2 class="event-name">{{ board['name'] }}</h2>
+        <p class="event-description">Make Predictions</p>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
