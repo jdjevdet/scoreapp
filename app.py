@@ -57,13 +57,6 @@ def init_db():
         )
     ''')
 
-    # Check if 'options' column exists
-    cursor.execute("PRAGMA table_info(matches);")
-    columns = [column[1] for column in cursor.fetchall()]
-    if 'options' not in columns:
-        cursor.execute("ALTER TABLE matches ADD COLUMN options TEXT;")
-        conn.commit()
-
     conn.commit()
     conn.close()
 
@@ -134,6 +127,24 @@ def global_standings():
     players = conn.execute('SELECT name, SUM(points) as total_points FROM players GROUP BY name ORDER BY total_points DESC').fetchall()
     conn.close()
     return render_template('global_standings.html', players=players)
+
+@app.route('/hall_of_fame')
+def hall_of_fame():
+    years = [2025]
+    return render_template('hall_of_fame.html', years=years)
+
+@app.route('/hall_of_fame/<int:year>')
+def hall_of_fame_year(year):
+    hall_data = {
+        2025: {
+            'image': url_for('static', filename='images/hof_2025.jpg'),
+            'caption': "The legendary moment that defined 2025!"
+        }
+    }
+    data = hall_data.get(year)
+    if not data:
+        return "Entry not found", 404
+    return render_template('hall_of_fame_year.html', year=year, data=data)
 
 # --- Admin Routes ---
 

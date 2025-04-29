@@ -1,0 +1,160 @@
+{% extends "base_public.html" %}
+
+{% block title %}Hall of Fame{% endblock %}
+
+{% block content %}
+
+<!-- Back Button -->
+<div style="padding: 20px; text-align: center;">
+  <a href="{{ url_for('public_home') }}" 
+     style="background-color: white; color: black; font-weight: bold; font-size: 16px; padding: 10px 24px; border-radius: 8px; text-decoration: none; box-shadow: 0 2px 5px rgba(0,0,0,0.5); transition: background-color 0.3s; display: inline-block;">
+    ← Back
+  </a>
+</div>
+
+<!-- Hall of Fame Header -->
+<h1 style="text-align: center; color: white; font-size: 40px; margin-top: 10px; margin-bottom: 40px;">
+  Hall of Fame
+</h1>
+
+<!-- Hall of Fame Grid -->
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; padding: 0 20px;">
+
+  <!-- 2025 Winner with Flip Animation -->
+  <div class="hall-photo-container fade-in" style="max-width: 450px; text-align: center; perspective: 1000px;">
+    <div class="flip-card" onclick="flipCard(this)">
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          <img src="{{ url_for('static', filename='images/hof_2025.jpg') }}" alt="2025 Front">
+        </div>
+        <div class="flip-face flip-back">
+          <img src="{{ url_for('static', filename='images/hof_2025_alt.jpg') }}" alt="2025 Back">
+        </div>
+      </div>
+    </div>
+    <div class="hof-caption-box">
+     2025 MR. PREDICTAMANIA | JOHNNY
+    </div>
+  </div>
+
+</div>
+
+<!-- Styles -->
+<style>
+  .fade-in {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeIn 1s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .flip-card {
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .flip-inner {
+    width: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+  }
+
+  .flip-card.flipped .flip-inner {
+    transform: rotateY(180deg);
+  }
+
+  .flip-face {
+    backface-visibility: hidden;
+  }
+
+  .flip-front, .flip-back {
+    position: relative;
+    width: 100%;
+  }
+
+  .flip-back {
+    transform: rotateY(180deg);
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .flip-face img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+  }
+
+  .hof-caption-box {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 12px 20px;
+    margin-top: 70px;
+    display: inline-block;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s ease;
+  }
+
+  .hof-caption-box:hover {
+    transform: scale(1.02);
+  }
+
+  @media (max-width: 768px) {
+    .hall-photo-container {
+      max-width: 90% !important;
+    }
+
+    h1 {
+      font-size: 32px;
+    }
+
+    .hof-caption-box {
+      font-size: 18px;
+    }
+  }
+</style>
+
+<!-- Confetti Rain -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+  window.onload = function () {
+    const duration = 3 * 1000;
+    const animationEnd = Date.now() + duration;
+    const defaults = {
+      startVelocity: 30,
+      spread: 360,
+      ticks: 60,
+      zIndex: 1000
+    };
+
+    const interval = setInterval(function () {
+      const timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        return clearInterval(interval);
+      }
+
+      confetti(Object.assign({}, defaults, {
+        particleCount: 25,
+        origin: { x: Math.random(), y: 0 }
+      }));
+    }, 150);
+  };
+
+  function flipCard(cardElement) {
+    cardElement.classList.toggle('flipped');
+  }
+</script>
+
+{% endblock %}
