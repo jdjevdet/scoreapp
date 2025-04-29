@@ -6,7 +6,7 @@
 
 <!-- Top Back Button -->
 <div style="padding: 20px; text-align: center;">
-  <a href="{{ url_for('public_home') }}" style="background-color: yellow; color: black; font-weight: bold; font-size: 18px; padding: 10px 24px; border-radius: 8px; text-decoration: none; box-shadow: 0 2px 5px rgba(0,0,0,0.5); transition: background-color 0.3s;">
+  <a href="{{ url_for('public_home') }}" style="background-color: white; color: black; font-weight: bold; font-size: 18px; padding: 10px 24px; border-radius: 8px; text-decoration: none; box-shadow: 0 2px 5px rgba(0,0,0,0.5); transition: background-color 0.3s;">
     ← Back
   </a>
 </div>
@@ -18,7 +18,7 @@
 
 <!-- Main Form Container -->
 <div class="form-container">
-  <h1 style="color: yellow; text-align: center; font-size: 32px; margin-bottom: 30px;">{{ board['name'] }} - Make Your Picks</h1>
+  <h1 style="color: white; text-align: center; font-size: 32px; margin-bottom: 30px;">{{ board['name'] }} - Make Your Picks</h1>
 
   <form method="post">
 
@@ -30,9 +30,9 @@
 
     <!-- Matches -->
     {% for match in matches %}
-    <div style="margin-bottom: 30px; background-color: #333; padding: 20px; border-radius: 8px; border: 2px solid yellow;">
+    <div style="margin-bottom: 30px; background-color: #333; padding: 20px; border-radius: 8px; border: 2px solid white;">
 
-      <h2 style="color: yellow; font-size: 24px; margin-bottom: 15px;">{{ match['match_name'] }}</h2>
+      <h2 style="color: white; font-size: 24px; margin-bottom: 15px;">{{ match['match_name'] }}</h2>
 
       {% for option in match['options'] %}
       <div style="margin-bottom: 10px;">
@@ -48,7 +48,7 @@
 
     <!-- Submit Button -->
     <div style="text-align: center;">
-      <button type="submit" style="background-color: yellow; color: black; font-weight: bold; font-size: 20px; padding: 12px 30px; border-radius: 10px; border: none; cursor: pointer;">Submit Picks</button>
+      <button type="submit" style="background-color: white; color: black; font-weight: bold; font-size: 20px; padding: 12px 30px; border-radius: 10px; border: none; cursor: pointer;">Submit Picks</button>
     </div>
 
   </form>
@@ -61,7 +61,7 @@
     margin: 0 auto;
     padding: 30px;
     background-color: #1e1e1e;
-    border: 3px solid yellow;
+    border: 3px solid white;
     border-radius: 10px;
   }
 

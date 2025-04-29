@@ -11,14 +11,13 @@
   <a href="{{ url_for('login') }}" class="nav-btn">Admin</a>
 </div>
 
+<!-- Banner Section -->
 <div class="banner-wrapper">
-    <img src="{{ url_for('static', filename='images/bwl_banner.jpg') }}" alt="BWL Banner" class="bwl-banner">
+  <img src="{{ url_for('static', filename='images/bwl_banner.jpg') }}" alt="BWL Banner" class="bwl-banner">
 </div>
-
 
 <!-- Events Section -->
 <div class="events-container">
-
   {% if boards %}
     {% for board in boards %}
     <div class="event-card">
@@ -33,7 +32,6 @@
   {% else %}
     <p style="text-align: center; color: white; font-size: 24px;">No events available yet.</p>
   {% endif %}
-
 </div>
 
 <!-- Styles -->
@@ -50,19 +48,36 @@
   }
 
   .nav-btn {
-    background-color: yellow;
+    background-color: white;
     color: black;
     font-weight: bold;
     padding: 12px 24px;
     border-radius: 8px;
     text-decoration: none;
     font-size: 18px;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
   }
 
   .nav-btn:hover {
-    background-color: #ffd700;
+    background-color: #e0e0e0;
+    color: black;
   }
+
+  /* Banner */
+  .banner-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto 40px;
+  }
+
+  .bwl-banner {
+    max-width: 1000px;
+    width: 80%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+
 
   /* Events */
   .events-container {
@@ -76,7 +91,7 @@
 
   .event-card {
     background-color: #1e1e1e;
-    border: 2px solid yellow;
+    border: 2px solid white;
     border-radius: 12px;
     overflow: hidden;
     width: 300px;
@@ -101,13 +116,13 @@
   }
 
   .event-info h2 {
-    color: yellow;
+    color: white;
     font-size: 22px;
     margin-bottom: 20px;
   }
 
   .action-btn {
-    background-color: yellow;
+    background-color: white;
     color: black;
     font-weight: bold;
     padding: 10px 20px;
@@ -115,11 +130,12 @@
     text-decoration: none;
     font-size: 16px;
     display: inline-block;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
   }
 
   .action-btn:hover {
-    background-color: #ffd700;
+    background-color: #e0e0e0;
+    color: black;
   }
 
   /* MOBILE RESPONSIVE STYLES */
@@ -146,6 +162,10 @@
 
     .event-image {
       height: 160px;
+    }
+
+    .bwl-banner {
+      width: 95%;
     }
   }
 </style>

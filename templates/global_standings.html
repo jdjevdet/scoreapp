@@ -6,7 +6,7 @@
 
 <!-- Top Back Button -->
 <div style="padding: 20px; text-align: center;">
-  <a href="{{ url_for('public_home') }}" style="background-color: yellow; color: black; font-weight: bold; font-size: 18px; padding: 10px 24px; border-radius: 8px; text-decoration: none; box-shadow: 0 2px 5px rgba(0,0,0,0.5); transition: background-color 0.3s;">
+  <a href="{{ url_for('public_home') }}" style="background-color: white; color: black; font-weight: bold; font-size: 18px; padding: 10px 24px; border-radius: 8px; text-decoration: none; box-shadow: 0 2px 5px rgba(0,0,0,0.5); transition: background-color 0.3s;">
     ← Back
   </a>
 </div>
@@ -14,10 +14,10 @@
 <!-- Global Standings Box -->
 <div class="standings-box">
 
-  <h1 style="color: yellow; text-align: center; font-size: 36px; margin-bottom: 30px;">Global Standings</h1>
+  <h1 style="color: white; text-align: center; font-size: 36px; margin-bottom: 30px;">Global Standings</h1>
 
   {% if players %}
-    <div style="border: 3px solid yellow; border-radius: 10px; overflow: hidden;">
+    <div style="border: 3px solid white; border-radius: 10px; overflow: hidden;">
 
       {% for player in players %}
       <div class="player-row"
@@ -68,7 +68,7 @@
     margin: 0 auto;
     padding: 30px;
     background-color: black;
-    border: 3px solid yellow;
+    border: 3px solid white;
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.7);
   }
