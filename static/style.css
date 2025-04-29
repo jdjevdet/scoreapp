@@ -67,3 +67,15 @@ table.players-table {
     padding: 8px;
   }
 }
+.banner-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0 20px;
+}
+
+.bwl-banner {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border: 2px solid yellow;
+}
