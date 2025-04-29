@@ -119,3 +119,43 @@ input[type="text"], input[type="password"] {
   font-weight: bold;
   color: white;
 }
+
+/* MAKE ADMIN DASHBOARD MOBILE FRIENDLY */
+@media (max-width: 768px) {
+  .nav-bar {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-btn {
+    width: 90%;
+    font-size: 18px;
+    padding: 10px;
+  }
+
+  .btn {
+    width: 90%;
+    font-size: 18px;
+    padding: 10px;
+  }
+
+  input[type="text"], input[type="password"] {
+    width: 90%;
+    font-size: 18px;
+    padding: 10px;
+  }
+
+  .board-tiles, .events-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .event-tile, .board-tile {
+    width: 90%;
+  }
+
+  .event-tile img, .board-tile img {
+    height: 200px;
+  }
+}

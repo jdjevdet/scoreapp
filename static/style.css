@@ -4,12 +4,14 @@ body {
   font-family: Arial, sans-serif;
   margin: 0; padding: 0;
 }
+
 .container {
   max-width: 800px;
   margin: auto;
   padding: 20px;
   text-align: center;
 }
+
 .btn {
   background: #ffd700;
   color: #000;
@@ -17,14 +19,51 @@ body {
   text-decoration: none;
   border-radius: 4px;
   margin: 4px;
+  font-weight: bold;
+  font-size: 18px;
+  display: inline-block;
+  transition: background-color 0.3s;
 }
+
+.btn:hover {
+  background: #e6c200;
+}
+
 table.players-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
 }
+
 .players-table th, .players-table td {
   border: 1px solid #444;
-  padding: 8px;
+  padding: 12px;
+  font-size: 18px;
 }
-.players-table th { background: #ffd700; color: #000; }
+
+.players-table th {
+  background: #ffd700;
+  color: #000;
+}
+
+/* MAKE EVERYTHING MOBILE FRIENDLY */
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+    padding: 10px;
+  }
+
+  .btn {
+    width: 90%;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  table.players-table {
+    font-size: 14px;
+  }
+
+  .players-table th, .players-table td {
+    padding: 8px;
+  }
+}
