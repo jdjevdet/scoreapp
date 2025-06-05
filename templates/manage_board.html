@@ -186,19 +186,21 @@
       {% endfor %}
     </div>
   </div>
+<!-- Add Match Section -->
+<div class="section">
+  <h2>Add New Match</h2>
+  <form action="{{ url_for('add_match', board_id=board['id']) }}" method="POST">
+    <input type="text" name="match_name" placeholder="Match Title (e.g. John vs Randy)" required><br>
+    <input type="text" name="options" placeholder="Option 1 (e.g. John Cena)" required><br>
+    <input type="text" name="options" placeholder="Option 2 (e.g. Randy Orton)" required><br>
+    <input type="text" name="options" placeholder="Option 3 (optional)"><br>
+    <input type="text" name="options" placeholder="Option 4 (optional)"><br>
+    <input type="text" name="options" placeholder="Option 5 (optional)"><br>
+    <input type="text" name="options" placeholder="Option 6 (optional)"><br>
+    <button type="submit" class="btn">Add Match</button>
+  </form>
+</div>
 
-  <!-- Add Match Section -->
-  <div class="section">
-    <h2>Add New Match</h2>
-    <form action="{{ url_for('add_match', board_id=board['id']) }}" method="POST">
-      <input type="text" name="match_name" placeholder="Match Title (e.g. John vs Randy)" required><br>
-      <input type="text" name="options" placeholder="Option 1 (e.g. John Cena)" required><br>
-      <input type="text" name="options" placeholder="Option 2 (e.g. Randy Orton)" required><br>
-      <input type="text" name="options" placeholder="Option 3 (optional)"><br>
-      <input type="text" name="options" placeholder="Option 4 (optional)"><br>
-      <button type="submit" class="btn">Add Match</button>
-    </form>
-  </div>
 
   <!-- Matches List Section -->
   <div class="section">
